@@ -21,7 +21,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
 <!--    <context:component-scan base-package="com.yang.crm">-->
 <!--        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
 <!--    </context:component-scan>-->
-    <context:component-scan base-package="com.yang.crm.service"/>
+    <context:component-scan base-package="com.yang.crm.settings.service"/>
     <!-- 导入数据相关配置 -->
     <import resource="applicationContext-datasource.xml" />
 </beans>
