@@ -10,10 +10,10 @@
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
     <!-- 配置数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="root"/>
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="name" value="root"></property>
         <property name="password" value="123456"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/crm2008?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/crm2008"/>
     </bean>
     <!-- 配置SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
