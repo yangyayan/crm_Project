@@ -1,6 +1,8 @@
 package com.yang.crm.settings.web.controller;
 
+import com.yang.crm.commons.contants.Contants;
 import com.yang.crm.commons.dimain.ReturnObject;
+import com.yang.crm.commons.utlis.DateUtils;
 import com.yang.crm.settings.domain.User;
 import com.yang.crm.settings.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,19 +47,20 @@ public class UserController {
         map.put("loginPwd", loginPwd);
         User user = userService.queryUserByLoginActAndPwd(map);
         if (user == null) {
-            return new ReturnObject("0", "用户名或密码错误");
+            return new ReturnObject(Contants.RETURN_OBJECT_CODE_FAIL, "用户名或密码错误");
         } else {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String nowStr = sdf.format(new Date());
+            String nowStr = DateUtils.formateDateTime(new Date());
             //查看账户是否过期
             if (nowStr.compareTo(user.getExpireTime()) > 0) {
-                return new ReturnObject("0", "账户状态已过期");
+                return new ReturnObject(Contants.RETURN_OBJECT_CODE_FAIL, "账户状态已过期");
             } else if ("0".equals(user.getLockState())) { //状态被锁定
-                return new ReturnObject("0","当前账户被锁定");
+                return new ReturnObject(Contants.RETURN_OBJECT_CODE_FAIL,"当前账户被锁定");
             } else if (!user.getAllowIps().contains(req.getRemoteAddr())) {//查看访问ip是否安全
-                return new ReturnObject("0","ip受限");
-            } else {//登录成功
-                return new ReturnObject("1");
+                return new ReturnObject(Contants.RETURN_OBJECT_CODE_FAIL,"ip受限");
+            } else {
+                //登录成功,把user保存到session
+                req.getSession().setAttribute(Contants.SESSION_USER,user);
+                return new ReturnObject(Contants.RETURN_OBJECT_CODE_SUCCESS);
             }
         }
     }
