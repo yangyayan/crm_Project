@@ -43,9 +43,6 @@
 				},
 				type:'post',
 				dataType:'json',
-				beforesend:function () {
-					$("#msg").html("正在验证....")
-				},
 				success:function (data) {
 					if(data.code=="1"){
 						//登录成功
