@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -75,11 +76,27 @@ public class UserController {
                     c2.setMaxAge(0);
                     resp.addCookie(c1);
                     resp.addCookie(c2);
-                    System.out.println(c1.getName()+c1.getValue());
                 }
                 req.getSession() .setAttribute(Contants.SESSION_USER,user);
                 return new ReturnObject(Contants.RETURN_OBJECT_CODE_SUCCESS);
             }
         }
+    }
+
+    /**
+     * 处理用户退出系统请求
+     * @return
+     */
+    @RequestMapping("toLogout")
+    public String toLogout(HttpServletRequest req,HttpServletResponse resp) {
+        Cookie c1 = new Cookie("loginAct", "1");
+        Cookie c2 = new Cookie("loginPwd", "1");
+        c1.setMaxAge(0);
+        c2.setMaxAge(0);
+        resp.addCookie(c1);
+        resp.addCookie(c2);
+        //销毁session
+        req.getSession().invalidate();
+        return "redirect:/";
     }
 }
