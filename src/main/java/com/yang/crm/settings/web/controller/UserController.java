@@ -77,7 +77,7 @@ public class UserController {
                     resp.addCookie(c1);
                     resp.addCookie(c2);
                 }
-                req.getSession() .setAttribute(Contants.SESSION_USER,user);
+                req.getSession().setAttribute(Contants.SESSION_USER,user);
                 return new ReturnObject(Contants.RETURN_OBJECT_CODE_SUCCESS);
             }
         }
