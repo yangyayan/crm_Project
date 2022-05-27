@@ -20,20 +20,22 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
 http://www.springframework.org/schema/util
 http://www.springframework.org/schema/util/spring-util.xsd">
     <!-- dispatcherServlet截获所有URL请求 -->
-    <mvc:default-servlet-handler />
+    <mvc:default-servlet-handler/>
     <!-- spring mvc 扫描包下的controller -->
-<!--    <context:component-scan base-package="com.yang.crm.web.controller"/>-->
-    <context:component-scan base-package="com.yang.crm" use-default-filters="false">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    <!--    <context:component-scan base-package="com.yang.crm"/>-->
+    <context:component-scan base-package="com" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
+
+
     <!-- 配置注解驱动 -->
     <mvc:annotation-driven/>
     <!-- 配置视图解析器 -->
-<!--    <bean id="viewResolver"-->
-<!--          class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-<!--        <property name="prefix" value="/WEB-INF/pages/"/>-->
-<!--        <property name="suffix" value=".html"/>-->
-<!--    </bean>-->
+    <!--    <bean id="viewResolver"-->
+    <!--          class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+    <!--        <property name="prefix" value="/WEB-INF/pages/"/>-->
+    <!--        <property name="suffix" value=".html"/>-->
+    <!--    </bean>-->
 
     <!--    配置thymeleaf模板解析器-->
     <bean class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver" id="templateResolver">
@@ -55,7 +57,7 @@ http://www.springframework.org/schema/util/spring-util.xsd">
         <property name="characterEncoding" value="UTF-8"/>
     </bean>
 
-<!--    配置拦截器-->
+    <!--    配置拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/settings/**"/>
@@ -66,7 +68,6 @@ http://www.springframework.org/schema/util/spring-util.xsd">
         </mvc:interceptor>
     </mvc:interceptors>
 
-<!--    <mvc:default-servlet-handler/>-->
     <!-- 配置文件上传解析器 id:必须是multipartResolver-->
     <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="#{1024*1024*80}"/>

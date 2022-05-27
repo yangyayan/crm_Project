@@ -1,6 +1,6 @@
 package com.yang.crm.settings.web.interceptor;
 
-import com.yang.crm.commons.Contants;
+import com.yang.crm.commons.contants.Contants;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
